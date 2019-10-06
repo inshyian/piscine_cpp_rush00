@@ -6,7 +6,7 @@
 # include <fstream>
 
 
-class CollectableItems;
+class Collection;
 
 class Core
 {
@@ -27,9 +27,9 @@ private:
 	Player *_player;
 	int _score;
 
-	CollectableItems *_steroids;
-	CollectableItems *_bullets;
-	CollectableItems *_enemies;
+	Collection *_steroids;
+	Collection *_bullets;
+	Collection *_enemies;
 
 public:
 	Core(void);

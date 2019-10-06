@@ -1,23 +1,23 @@
-#include "CollectableItems.hpp"
+#include "Collection.hpp"
 
 #include "AItem.hpp"
 
-CollectableItems::CollectableItems(void)
+Collection::Collection(void)
 {
 	_count = 0;
 }
 
-CollectableItems::~CollectableItems()
+Collection::~Collection()
 {
 
 }
 
-CollectableItems::CollectableItems(CollectableItems const &other)
+Collection::Collection(Collection const &other)
 {
 	*this = other;
 }
 
-CollectableItems &CollectableItems::operator =(CollectableItems const &other)
+Collection &Collection::operator =(Collection const &other)
 {
 	if (this != &other)
 	{
@@ -37,14 +37,14 @@ CollectableItems &CollectableItems::operator =(CollectableItems const &other)
 	return *this;
 }
 
-AItem*	CollectableItems::getUnit(int n) const
+AItem*	Collection::getUnit(int n) const
 {
 	if (n < 0 || n > _count)
 		return (NULL);
 	return _items[n];
 }
 
-void	CollectableItems::setNullUnit(int n)
+void	Collection::setNullUnit(int n)
 {
 	if (n < 0 || n > _count)
 		return ;
@@ -53,12 +53,12 @@ void	CollectableItems::setNullUnit(int n)
 }
 
 
-int	CollectableItems::getCount(void) const
+int	Collection::getCount(void) const
 {
 	return _count;
 }
 
-int	CollectableItems::push(AItem* newItem)
+int	Collection::push(AItem* newItem)
 {
 	if (newItem == NULL)
 		return _count;
@@ -66,7 +66,7 @@ int	CollectableItems::push(AItem* newItem)
 	{
 		if (_items[i] == newItem)
 		{
-			std::cout << "Item already in CollectableItems." << std::endl;
+			std::cout << "Item already in Collection." << std::endl;
 			return _count;
 		}
 	}

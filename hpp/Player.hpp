@@ -1,7 +1,7 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
-# include "Bullet.hpp"
+# include "Amo.hpp"
 
 class Player
 {
@@ -20,7 +20,7 @@ public:
 	Player &operator =(Player const &other);
 
 	void takeDamage(int damge);
-	Bullet *shoot(void);
+	Amo *shoot(void);
 	bool isAlive();
 
 	int getX() const;

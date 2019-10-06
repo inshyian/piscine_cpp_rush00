@@ -3,10 +3,10 @@ NAME = ft_retro
 SRC = 	main.cpp \
 		Player.cpp \
 		Core.cpp \
-		CollectableItems.cpp \
+		Collection.cpp \
 		Star.cpp \
 		AItem.cpp \
-		Bullet.cpp \
+		Amo.cpp \
 		Enemy.cpp
 
 
@@ -14,10 +14,10 @@ OBJ = $(addprefix obj/, $(SRC:.cpp=.o))
 
 HEADERS = 	hpp/Player.hpp \
 			hpp/Core.hpp \
-			hpp/CollectableItems.hpp \
+			hpp/Collection.hpp \
 			hpp/Star.hpp \
 			hpp/AItem.hpp \
-			hpp/Bullet.hpp \
+			hpp/Amo.hpp \
 			hpp/Enemy.hpp
 
 

@@ -1,9 +1,9 @@
 #include "Core.hpp"
-#include "CollectableItems.hpp"
+#include "Collection.hpp"
 #include "Star.hpp"
 #include "Enemy.hpp"
+#include "Amo.hpp"
 
-#include "Bullet.hpp"
 #include <ctime>
 #include <iostream>
 
@@ -26,9 +26,9 @@ Core::Core(void)
 
 	_player = new Player(COLUMNS / 2, LINES - 2, 2);
 	
-	_steroids = new CollectableItems();
-	_bullets = new CollectableItems();
-	_enemies = new CollectableItems();
+	_steroids = new Collection();
+	_bullets = new Collection();
+	_enemies = new Collection();
 }
 
 Core::~Core()
@@ -196,16 +196,15 @@ void Core::start()
 
 		if ( key == 32 )
 		{
-			Bullet *newBullet = _player->shoot();
-			_bullets->push(newBullet);
+			Amo *newAmo = _player->shoot();
+			_bullets->push(newAmo);
 		}
 		if ( key == 97 && _player->getX() > 3 )
 			_player->moveLeft();
 		else if ( key == 100 && _player->getX() < COLUMNS - 3 )
 			_player->moveRight();
 		
-		
-
+	
 		// BULLETS
 		for (int i = 0; i < _bullets->getCount(); i++)
 		{
