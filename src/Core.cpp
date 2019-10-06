@@ -199,6 +199,12 @@ void		Core::createVertEnemy(int count) {
 	}
 }
 
+void		Core::createSteroids(int count) {
+
+	for (int i = 0; i < count; i++)
+		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
+}
+
 void Core::start()
 {
 	srand(clock());
@@ -206,16 +212,14 @@ void Core::start()
 	int key = -1;
 
 	// RANDOM STEROIDS
-	for (int i = 0; i < 50; i++)
-		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
+	createSteroids(50);
+
 	// RANDOM ENEMIES
 	createDotEnemy(5);
 	createCrossEnemy(3);
 	createHorEnemy(3);
 	createVertEnemy(3);
 	createSqEnemy(3);
-
-
 
 	_lastTime = clock();
 	_enemyTime = clock();
@@ -275,6 +279,7 @@ void Core::start()
 		wrefresh(_win);
 		wrefresh(_info);
 		key = getch();
+		// Throws away keyboard buffer
 		flushinp();
 		if (key == 27)
 			break ;

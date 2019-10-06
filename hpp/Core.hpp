@@ -37,6 +37,8 @@ private:
 
 	void		moveEnemies();
 
+	void		createSteroids(int count);
+
 	void		createDotEnemy(int count);
 	void		createCrossEnemy(int count);
 	void		createSqEnemy(int count);
