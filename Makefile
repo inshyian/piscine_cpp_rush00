@@ -12,7 +12,7 @@ SRC = 	main.cpp \
 OBJ = $(addprefix obj/, $(SRC:.cpp=.o))
 
 HEADERS = 	hpp/Player.hpp \
-			hpp/Game.hpp \
+			hpp/Core.hpp \
 			hpp/Collection.hpp \
 			hpp/Star.hpp \
 			hpp/Object.hpp \
