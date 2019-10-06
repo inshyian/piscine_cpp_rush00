@@ -11,8 +11,10 @@ Core::Core(void)
 {
 	initscr();
 	noecho();
+	raw();
 	curs_set(false);
 	nodelay(stdscr, true);
+	keypad(stdscr, TRUE);
 
 	_score = 0;
 	_win = newwin(LINES, COLUMNS, 0, 0);
@@ -141,10 +143,7 @@ void Core::start()
 
 	// RANDOM STEROIDS
 	for (int i = 0; i < 50; i++)
-	{
 		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
-	}
-
 	// RANDOM ENEMIES
 	for (int i = 0; i < 10; i++)
 	{
@@ -153,24 +152,19 @@ void Core::start()
 		_enemies->push(new Enemy(rX, rY));
 
 	}
-
 	_lastTime = clock();
 	_enemyTime = clock();
 	_startGame = time(NULL);
-
-	
 	while (true)
 	{
+		if ((float)(clock() - _lastTime) / CLOCKS_PER_SEC < 0.1)
+			continue ;
+
 		if (_player->getLives() == 0 || _score == _enemies->getCount())
 			break ;
 
 		printInfo();
-		if ((float)(clock() - _lastTime) / CLOCKS_PER_SEC < 0.1)
-		{
-			continue ;
-		}
-		_lastTime = clock();
-
+			_lastTime = clock();
 		wclear(_win);
 		wattron(_win, COLOR_PAIR(1));
 		wattron(_info, COLOR_PAIR(1));
@@ -178,8 +172,6 @@ void Core::start()
 		box(_info, 0, 0);
 		wattroff(_win, COLOR_PAIR(1));
 		wattroff(_info, COLOR_PAIR(1));
-
-
 		for (int i = 0; i < _steroids->getCount(); i++)
 		{
 			if (_steroids->getUnit(i)->getY() > LINES - 2)
@@ -188,12 +180,10 @@ void Core::start()
 				mvwaddstr(_win, _steroids->getUnit(i)->getY(), _steroids->getUnit(i)->getX(), ".");
 			_steroids->getUnit(i)->moveDown();
 		}
-
 		// PLAYER
 		wattron(_win, COLOR_PAIR(3));
 		mvwaddstr(_win, _player->getY(), _player->getX(), "^");
 		wattroff(_win, COLOR_PAIR(3));
-
 		if ( key == 32 )
 		{
 			Amo *newAmo = _player->shoot();
@@ -203,8 +193,7 @@ void Core::start()
 			_player->moveLeft();
 		else if ( key == 100 && _player->getX() < COLUMNS - 3 )
 			_player->moveRight();
-		
-	
+		fflush(stdin);
 		// BULLETS
 		for (int i = 0; i < _bullets->getCount(); i++)
 		{
@@ -216,17 +205,12 @@ void Core::start()
 			}
 			_bullets->getUnit(i)->moveUp();
 		}
-
 		// ENEMIES
-
 		moveEnemies();
-		
 		// REFRESH
 		wrefresh(_win);
 		wrefresh(_info);
-
 		key = getch();
-
 		if (key == 27)
 			break ;
 	}
