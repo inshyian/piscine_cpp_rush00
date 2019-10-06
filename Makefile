@@ -21,13 +21,13 @@ HEADERS = 	hpp/Player.hpp \
 			hpp/Enemy.hpp
 
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 all: $(NAME)
 
 $(NAME): obj $(OBJ)
 	clang++ $(OBJ) -o $(NAME) -lncurses
-	
+
 obj/%.o: src/%.cpp $(HEADERS)
 	clang++ $(FLAGS) -c $< -o $@ -I hpp
 

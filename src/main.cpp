@@ -4,11 +4,11 @@
 
 int main(void)
 {
+	Core 	*gameConsole = new Core();
 
-	Core *game1 = new Core();
-	game1->start();
-
-	// system("leaks ft_retro");
-	delete game1;
+	gameConsole->start();
+	// system("leaks -q ft_retro");
+	delete gameConsole;
+	system("leaks -q ft_retro");
 	return 0;
 }

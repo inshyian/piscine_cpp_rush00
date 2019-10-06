@@ -81,7 +81,6 @@ bool Core::checkCollision(Object *enemy)
 	return false;
 }
 
-
 void Core::moveEnemies()
 {
 	std::string		character;
