@@ -3,7 +3,7 @@
 
 # include "Bullet.hpp"
 
-class Player
+class Player : public Object
 {
 	private:
 		int _x;
@@ -21,12 +21,12 @@ class Player
 		bool checkHp(); 							//isAlive
 		Bullet *shot(void);							//shoot
 		void damageReceived(int value);				//takeDamage
-		int getCordX() const;						//getX
-		int getCordY() const;						//getY
 		int getHp() const;							//getLives
-		void setLives(int value);					//setLives
-		void moveL();								//moveLeft
-		void moveR();								//moveRight
+		void setHpValue(int value);					//setLives
+		//moveL() inherit
+		//moveR() inherit
+		//moveU() inherit
+		//moveD() inherit
 };
 
 #endif
