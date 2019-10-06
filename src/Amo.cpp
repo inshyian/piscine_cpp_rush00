@@ -1,6 +1,5 @@
 #include "Amo.hpp"
 
-
 Amo::Amo(void)
 {
 

@@ -32,5 +32,6 @@ Enemy::Enemy(int x, int y, char character) : Object(x, y, character)
 Object* Enemy::clone() const
 {
 	Enemy *createNewOne = new Enemy(*this);
+
 	return createNewOne;
 }

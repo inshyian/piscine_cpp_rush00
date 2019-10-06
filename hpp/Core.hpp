@@ -1,6 +1,7 @@
 #ifndef CORE_HPP
 # define CORE_HPP
 
+# include <string.h>
 # include <ncurses.h>
 # include "Player.hpp"
 # include <fstream>

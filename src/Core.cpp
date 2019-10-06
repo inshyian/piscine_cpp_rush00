@@ -134,7 +134,7 @@ void Core::printInfo()
 {
 
 	wattron(_info, COLOR_PAIR(2));
-	mvwprintw(_info, 1, 6, "*GAME*", _player->getLives());
+	mvwprintw(_info, 1, 6, "*GAME*");
 	mvwprintw(_info, 4, 2, "LIVES: %d", _player->getLives());
 	mvwprintw(_info, 6, 2, "SCORE: %d", _score);
 	mvwprintw(_info, 8, 2, "TIME: %ds", (time(NULL) - _startGame));
@@ -252,10 +252,9 @@ void		Core::playerAction(int key) {
 
 void Core::start()
 {
-	srand(clock());
-
 	int key = -1;
 
+	srand(clock());
 	// RANDOM STEROIDS
 	createSteroids(50);
 	// RANDOM ENEMIES
