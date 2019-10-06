@@ -1,22 +1,20 @@
-#include "Steroid.hpp"
+#include "Star.hpp"
 
-// #include <iostream>
-
-Steroid::Steroid(void)
+Star::Star(void)
 {
 }
 
-Steroid::~Steroid()
+Star::~Star()
 {
 
 }
 
-Steroid::Steroid(Steroid const &other)
+Star::Star(Star const &other)
 {
 	*this = other;
 }
 	
-Steroid &Steroid::operator =(Steroid const &other)
+Star &Star::operator =(Star const &other)
 {
 	if (this != &other)
 	{
@@ -26,14 +24,14 @@ Steroid &Steroid::operator =(Steroid const &other)
 	return *this;
 }
 
-Steroid::Steroid(int x, int y) : AItem(x, y)
+Star::Star(int x, int y) : AItem(x, y)
 {
 
 }
 
-AItem* Steroid::clone() const
+AItem* Star::clone() const
 {
-	Steroid *newST = new Steroid(*this);
+	Star *newST = new Star(*this);
 	return newST;
 }
 
