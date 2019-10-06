@@ -1,6 +1,7 @@
 #ifndef PLAYER_HPP
 # define PLAYER_HPP
 
+# include <iostream>
 # include "Amo.hpp"
 
 class Player

@@ -66,6 +66,7 @@ void Player::takeDamage(int damge)
 
 Amo *Player::shoot(char character)
 {
+	std::cout << "";
 	return new Amo(_x, _y - 1, character);
 }
 
