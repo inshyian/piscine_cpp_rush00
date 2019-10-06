@@ -1,7 +1,7 @@
 #include "Core.hpp"
 #include "CollectableItems.hpp"
 #include "Star.hpp"
-#include "SmallEnemy.hpp"
+#include "Enemy.hpp"
 
 #include "Bullet.hpp"
 #include <ctime>
@@ -150,7 +150,7 @@ void Core::start()
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 5);
-		_enemies->push(new SmallEnemy(rX, rY));
+		_enemies->push(new Enemy(rX, rY));
 
 	}
 

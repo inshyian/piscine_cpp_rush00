@@ -7,7 +7,7 @@ SRC = 	main.cpp \
 		Star.cpp \
 		AItem.cpp \
 		Bullet.cpp \
-		SmallEnemy.cpp
+		Enemy.cpp
 
 
 OBJ = $(addprefix obj/, $(SRC:.cpp=.o))
@@ -18,7 +18,7 @@ HEADERS = 	hpp/Player.hpp \
 			hpp/Star.hpp \
 			hpp/AItem.hpp \
 			hpp/Bullet.hpp \
-			hpp/SmallEnemy.hpp
+			hpp/Enemy.hpp
 
 
 FLAGS = -Wall -Wextra -Werror
