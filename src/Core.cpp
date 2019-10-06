@@ -16,6 +16,7 @@ Core::Core(void)
 	nodelay(stdscr, true);
 	keypad(stdscr, TRUE);
 
+	_cycles = 0;
 	_score = 0;
 	_win = newwin(LINES, COLUMNS, 0, 0);
 	_info = newwin(40, 20, 0, 180);
@@ -86,8 +87,10 @@ void Core::moveEnemies()
 {
 	std::string		character;
 
-	if ((float)(clock() - _enemyTime) / CLOCKS_PER_SEC > 0.1)
+	// if ((float)(clock() - _enemyTime) / CLOCKS_PER_SEC > 0.1)
+	if (_cycles == 8)
 	{
+		_cycles = 0;
 		for (int i = 0; i < _enemies->getCount(); i++)
 		{
 			if (_enemies->getUnit(i) != NULL && _enemies->getUnit(i)->getY() > LINES - 2)
@@ -131,7 +134,7 @@ void Core::moveEnemies()
 
 }
 
-void Core::printInfo()
+void		Core::printInfo()
 {
 
 	wattron(_info, COLOR_PAIR(2));
@@ -257,7 +260,7 @@ void		Core::playerAction(int key) {
 		_player->moveRight();
 }
 
-void Core::start()
+void		Core::start()
 {
 	int key = -1;
 
@@ -305,6 +308,7 @@ void Core::start()
 		key = getch();
 		// Throws away keyboard buffer
 		flushinp();
+		_cycles++;
 		if (key == 27)
 			break ;
 	}

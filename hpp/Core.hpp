@@ -20,6 +20,8 @@ private:
 	double				_lastTime;
 	double				_enemyTime;
 
+	int					_cycles;
+
 	WINDOW				*_win;
 	WINDOW				*_info;
 
