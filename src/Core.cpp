@@ -1,9 +1,9 @@
-#include "Amo.hpp"
 #include "Core.hpp"
+#include "CollectableItems.hpp"
 #include "Star.hpp"
-#include "Enemy.hpp"
-#include "Collection.hpp"
+#include "SmallEnemy.hpp"
 
+#include "Bullet.hpp"
 #include <ctime>
 #include <iostream>
 
@@ -26,9 +26,9 @@ Core::Core(void)
 
 	_player = new Player(COLUMNS / 2, LINES - 2, 2);
 	
-	_steroids = new Collection();
-	_bullets = new Collection();
-	_enemies = new Collection();
+	_steroids = new CollectableItems();
+	_bullets = new CollectableItems();
+	_enemies = new CollectableItems();
 }
 
 Core::~Core()
@@ -37,26 +37,26 @@ Core::~Core()
 	endwin();
 }
 
-Core::Core(Game const &assign)
+Core::Core(Core const &other)
 {
 	*this = other;
 }
 
-Core &Core::operator =(Core const &assign)
+Core &Core::operator =(Core const &other)
 {
-	if (this != &assign)
+	if (this != &other)
 	{
-		_player = assign._player;
+		_player = other._player;
 	}
 	return *this;
 }
 
-bool Core::checkPenetration(Object *enemy)
+bool Core::checkPenetration(AItem *enemy)
 {
 	for (int i = 0; i < _bullets->getCount(); i++)
 	{
-		if (enemy->getCordX() == _bullets->getUnit(i)->getCordX() &&
-			enemy->getCordY() == _bullets->getUnit(i)->getCordY())
+		if (enemy->getX() == _bullets->getUnit(i)->getX() &&
+			enemy->getY() == _bullets->getUnit(i)->getY())
 		{
 			_score++;
 			return true;
@@ -65,10 +65,10 @@ bool Core::checkPenetration(Object *enemy)
 	return false;
 }
 
-bool Core::checkCollision(Object *enemy)
+bool Core::checkCollision(AItem *enemy)
 {
-	if (_player->getCordX() == enemy->getCordX() &&
-		_player->getCordY() == enemy->getCordY())
+	if (_player->getX() == enemy->getX() &&
+		_player->getY() == enemy->getY())
 	{
 		_score++;
 		return true;
@@ -83,8 +83,8 @@ void Core::moveEnemies()
 	{
 		for (int i = 0; i < _enemies->getCount(); i++)
 		{
-			if (_enemies->getUnit(i) != NULL && _enemies->getUnit(i)->getCordY() > LINES -2)
-				_enemies->getUnit(i)->setCordY(0);
+			if (_enemies->getUnit(i) != NULL && _enemies->getUnit(i)->getY() > LINES - 2)
+				_enemies->getUnit(i)->setY(0);
 			else if (_enemies->getUnit(i) != NULL && checkPenetration(_enemies->getUnit(i)) == true)
 				_enemies->setNullUnit(i);
 			else if (_enemies->getUnit(i) != NULL && checkCollision(_enemies->getUnit(i)) == true)
@@ -94,8 +94,8 @@ void Core::moveEnemies()
 			}
 			else if (_enemies->getUnit(i) != NULL)
 			{
-				mvwaddstr(_win, _enemies->getUnit(i)->getCordY(), _enemies->getUnit(i)->getCordX(), "#");
-				_enemies->getUnit(i)->moveD();
+				mvwaddstr(_win, _enemies->getUnit(i)->getY(), _enemies->getUnit(i)->getX(), "#");
+				_enemies->getUnit(i)->moveDown();
 			}
 		}
 	}
@@ -142,7 +142,7 @@ void Core::start()
 	// RANDOM STEROIDS
 	for (int i = 0; i < 50; i++)
 	{
-		_steroids->push(new Steroid(rand() % COLUMNS, rand() % LINES));
+		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
 	}
 
 	// RANDOM ENEMIES
@@ -232,4 +232,3 @@ void Core::start()
 			break ;
 	}
 }
-

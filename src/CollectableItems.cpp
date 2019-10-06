@@ -1,25 +1,25 @@
-#include "Collection.hpp"
+#include "CollectableItems.hpp"
 
-#include "Object.hpp"
+#include "AItem.hpp"
 
-Collection::Collection(void)
+CollectableItems::CollectableItems(void)
 {
 	_count = 0;
 }
 
-Collection::~Collection()
+CollectableItems::~CollectableItems()
 {
 
 }
 
-Collection::Collection(Collection const &assign)
+CollectableItems::CollectableItems(CollectableItems const &other)
 {
-	*this = assign;
+	*this = other;
 }
 
-Collection &Collection::operator =(Collection const &assign)
+CollectableItems &CollectableItems::operator =(CollectableItems const &other)
 {
-	if (this != &assign)
+	if (this != &other)
 	{
 		if (_count > 0)
 		{
@@ -27,24 +27,24 @@ Collection &Collection::operator =(Collection const &assign)
 				delete _items[i];
 			delete _items;
 		
-		_count = assign._count;
+		_count = other._count;
 
-		_items = new Object*[_count];
+		_items = new AItem*[_count];
 		for (int i = 0; i < _count; i++)
-			this->_items[i] = assign.getUnit(i)->clone();
+			this->_items[i] = other.getUnit(i)->clone();
 		}
 	}
 	return *this;
 }
 
-Object*	Collection::getUnit(int n) const
+AItem*	CollectableItems::getUnit(int n) const
 {
 	if (n < 0 || n > _count)
 		return (NULL);
 	return _items[n];
 }
 
-void	Collection::setNullUnit(int n)
+void	CollectableItems::setNullUnit(int n)
 {
 	if (n < 0 || n > _count)
 		return ;
@@ -53,12 +53,12 @@ void	Collection::setNullUnit(int n)
 }
 
 
-int	Collection::getCount(void) const
+int	CollectableItems::getCount(void) const
 {
 	return _count;
 }
 
-int	Collection::push(Object* newItem)
+int	CollectableItems::push(AItem* newItem)
 {
 	if (newItem == NULL)
 		return _count;
@@ -66,16 +66,16 @@ int	Collection::push(Object* newItem)
 	{
 		if (_items[i] == newItem)
 		{
-			std::cout << "Item already in Collection." << std::endl;
+			std::cout << "Item already in CollectableItems." << std::endl;
 			return _count;
 		}
 	}
 
-	Object **container;
+	AItem **container;
 
 	if (_count == 0)
 	{		
-		container = new Object*[1];
+		container = new AItem*[1];
 		container[0] = newItem;
 		_items = container;
 		_count++;
@@ -84,7 +84,7 @@ int	Collection::push(Object* newItem)
 	{
 		_count++;
 		int i = 0;
-		container = new Object*[_count];
+		container = new AItem*[_count];
 		for (; i < (_count - 1); i++)
 			container[i] = _items[i];
 		container[i] = newItem;

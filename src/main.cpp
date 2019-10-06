@@ -5,7 +5,7 @@
 int main(void)
 {
 
-	Game *game1 = new Game();
+	Core *game1 = new Core();
 	game1->start();
 
 	// system("leaks ft_retro");
