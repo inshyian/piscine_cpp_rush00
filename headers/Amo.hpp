@@ -9,7 +9,7 @@ class Amo : public Object
 	Amo(void);
 	~Amo();
 
-	Amo(Amo const &other);
+	Amo(Amo const &assign);
 	
 	Amo &operator =(Bullet const &other);
 
