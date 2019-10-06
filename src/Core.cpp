@@ -19,7 +19,7 @@ Core::Core(void)
 	_score = 0;
 	_win = newwin(LINES, COLUMNS, 0, 0);
 	_info = newwin(40, 20, 0, 180);
-	
+
 	start_color();
 	init_pair(1, COLOR_RED, COLOR_BLACK);
 	init_pair(2, COLOR_GREEN, COLOR_BLACK);
@@ -27,7 +27,7 @@ Core::Core(void)
 	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
 
 	_player = new Player(COLUMNS / 2, LINES - 2, 2);
-	
+
 	_steroids = new Collection();
 	_bullets = new Collection();
 	_enemies = new Collection();
@@ -119,7 +119,7 @@ void Core::moveEnemies()
 		}
 	}
 	_enemyTime = clock();
-	
+
 }
 
 void Core::printInfo()
@@ -135,6 +135,70 @@ void Core::printInfo()
 
 }
 
+void		Core::createDotEnemy(int count) {
+
+	for (int i = 0; i < count; i++)
+	{
+		int rX = 3 + (rand() % 150);
+		int rY = 2 + (rand() % 5);
+		_enemies->push(new Enemy(rX, rY));
+
+	}
+}
+
+void		Core::createCrossEnemy(int count) {
+
+	for (int i = 0; i < count; i++)
+	{
+		int rX = 3 + (rand() % 140);
+		int rY = 2 + (rand() % 8);
+		_enemies->push(new Enemy(rX, rY));
+		_enemies->push(new Enemy(rX, rY + 1));
+		_enemies->push(new Enemy(rX, rY + 2));
+		_enemies->push(new Enemy(rX - 1, rY + 1));
+		_enemies->push(new Enemy(rX + 1, rY + 1));
+	}
+}
+
+void		Core::createSqEnemy(int count) {
+
+	for (int i = 0; i < count; i++)
+	{
+		int rX = 3 + (rand() % 150);
+		int rY = 2 + (rand() % 8);
+		_enemies->push(new Enemy(rX, rY));
+		_enemies->push(new Enemy(rX + 1, rY));
+		_enemies->push(new Enemy(rX, rY + 1));
+		_enemies->push(new Enemy(rX + 1, rY + 1));
+	}
+}
+
+void		Core::createHorEnemy(int count) {
+
+	for (int i = 0; i < count; i++)
+	{
+		int rX = 3 + (rand() % 150);
+		int rY = 2 + (rand() % 8);
+		_enemies->push(new Enemy(rX, rY));
+		_enemies->push(new Enemy(rX - 1, rY));
+		_enemies->push(new Enemy(rX + 1, rY));
+	}
+}
+
+void		Core::createVertEnemy(int count) {
+
+	for (int i = 0; i < count; i++)
+	{
+		int rX = 3 + (rand() % 150);
+		int rY = 2 + (rand() % 8);
+		_enemies->push(new Enemy(rX, rY));
+		_enemies->push(new Enemy(rX, rY + 1));
+		_enemies->push(new Enemy(rX, rY + 2));
+		_enemies->push(new Enemy(rX, rY + 3));
+		_enemies->push(new Enemy(rX, rY + 4));
+	}
+}
+
 void Core::start()
 {
 	srand(clock());
@@ -145,13 +209,14 @@ void Core::start()
 	for (int i = 0; i < 50; i++)
 		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
 	// RANDOM ENEMIES
-	for (int i = 0; i < 10; i++)
-	{
-		int rX = 3 + (rand() % 150);
-		int rY = 2 + (rand() % 5);
-		_enemies->push(new Enemy(rX, rY));
+	createDotEnemy(5);
+	createCrossEnemy(3);
+	createHorEnemy(3);
+	createVertEnemy(3);
+	createSqEnemy(3);
 
-	}
+
+
 	_lastTime = clock();
 	_enemyTime = clock();
 	_startGame = time(NULL);

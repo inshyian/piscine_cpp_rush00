@@ -5,31 +5,43 @@
 # include "Player.hpp"
 # include <fstream>
 
-
 class Collection;
 
 class Core
 {
 
 private:
-	static const int COLUMNS = 180;
-	static const int LINES = 40;
-	
-	time_t _startGame;
+	static const int	COLUMNS = 180;
+	static const int	LINES = 40;
 
-	double _lastTime;
-	double _enemyTime;
+	time_t				_startGame;
 
-	WINDOW *_win;
-	WINDOW *_info;
+	double				_lastTime;
+	double				_enemyTime;
+
+	WINDOW				*_win;
+	WINDOW				*_info;
 
 
-	Player *_player;
-	int _score;
+	Player				*_player;
+	int					_score;
 
-	Collection *_steroids;
-	Collection *_bullets;
-	Collection *_enemies;
+	Collection			*_steroids;
+	Collection			*_bullets;
+	Collection			*_enemies;
+
+	void		printInfo();
+
+	bool		checkPenetration(Object *enemy);
+	bool		checkCollision(Object *enemy);
+
+	void		moveEnemies();
+
+	void		createDotEnemy(int count);
+	void		createCrossEnemy(int count);
+	void		createSqEnemy(int count);
+	void		createHorEnemy(int count);
+	void		createVertEnemy(int count);
 
 public:
 	Core(void);
@@ -37,14 +49,7 @@ public:
 	~Core();
 
 	Core &operator =(Core const &other);
-	void start();
-
-	void printInfo();
-
-	bool checkPenetration(Object *enemy);
-	bool checkCollision(Object *enemy);
-
-	void moveEnemies();
+	void		start();
 };
 
 
