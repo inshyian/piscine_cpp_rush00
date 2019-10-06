@@ -6,11 +6,12 @@ class Object
 protected:
 	int _x;
 	int _y;
+	char _character;
 
 public:
 	Object(void);
 	Object(Object const &other);
-	Object(int x, int y);
+	Object(int x, int y, char character);
 	virtual ~Object();
 
 	Object &operator =(Object const &other);
@@ -27,6 +28,7 @@ public:
 	void setX(int x);
 	void setY(int y);
 
+	char getCharacter();
 };
 
 #endif

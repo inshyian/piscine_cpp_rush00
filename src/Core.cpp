@@ -84,6 +84,8 @@ bool Core::checkCollision(Object *enemy)
 
 void Core::moveEnemies()
 {
+	std::string		character;
+
 	if ((float)(clock() - _enemyTime) / CLOCKS_PER_SEC > 0.1)
 	{
 		for (int i = 0; i < _enemies->getCount(); i++)
@@ -99,7 +101,8 @@ void Core::moveEnemies()
 			}
 			else if (_enemies->getUnit(i) != NULL)
 			{
-				mvwaddstr(_win, _enemies->getUnit(i)->getY(), _enemies->getUnit(i)->getX(), "#");
+				character = _enemies->getUnit(i)->getCharacter();
+				mvwaddstr(_win, _enemies->getUnit(i)->getY(), _enemies->getUnit(i)->getX(), character.c_str());
 				_enemies->getUnit(i)->moveDown();
 			}
 		}
@@ -118,7 +121,10 @@ void Core::moveEnemies()
 				_enemies->setNullUnit(i);
 			}
 			else if (_enemies->getUnit(i) != NULL)
-				mvwaddstr(_win, _enemies->getUnit(i)->getY(), _enemies->getUnit(i)->getX(), "#");
+			{
+				character = _enemies->getUnit(i)->getCharacter();
+				mvwaddstr(_win, _enemies->getUnit(i)->getY(), _enemies->getUnit(i)->getX(), character.c_str());
+			}
 		}
 	}
 	_enemyTime = clock();
@@ -142,7 +148,7 @@ void		Core::createDotEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 5);
-		_enemies->push(new Enemy(rX, rY));
+		_enemies->push(new Enemy(rX, rY, 'o'));
 
 	}
 }
@@ -153,11 +159,11 @@ void		Core::createCrossEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 140);
 		int rY = 2 + (rand() % 8);
-		_enemies->push(new Enemy(rX, rY));
-		_enemies->push(new Enemy(rX, rY + 1));
-		_enemies->push(new Enemy(rX, rY + 2));
-		_enemies->push(new Enemy(rX - 1, rY + 1));
-		_enemies->push(new Enemy(rX + 1, rY + 1));
+		_enemies->push(new Enemy(rX, rY, '|'));
+		_enemies->push(new Enemy(rX, rY + 1, '+'));
+		_enemies->push(new Enemy(rX, rY + 2, '|'));
+		_enemies->push(new Enemy(rX - 1, rY + 1, '-'));
+		_enemies->push(new Enemy(rX + 1, rY + 1, '-'));
 	}
 }
 
@@ -167,10 +173,10 @@ void		Core::createSqEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 8);
-		_enemies->push(new Enemy(rX, rY));
-		_enemies->push(new Enemy(rX + 1, rY));
-		_enemies->push(new Enemy(rX, rY + 1));
-		_enemies->push(new Enemy(rX + 1, rY + 1));
+		_enemies->push(new Enemy(rX, rY, 'H'));
+		_enemies->push(new Enemy(rX + 1, rY, 'H'));
+		_enemies->push(new Enemy(rX, rY + 1, 'H'));
+		_enemies->push(new Enemy(rX + 1, rY + 1, 'H'));
 	}
 }
 
@@ -180,9 +186,9 @@ void		Core::createHorEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 8);
-		_enemies->push(new Enemy(rX, rY));
-		_enemies->push(new Enemy(rX - 1, rY));
-		_enemies->push(new Enemy(rX + 1, rY));
+		_enemies->push(new Enemy(rX, rY, '-'));
+		_enemies->push(new Enemy(rX - 1, rY, '-'));
+		_enemies->push(new Enemy(rX + 1, rY, '-'));
 	}
 }
 
@@ -192,18 +198,18 @@ void		Core::createVertEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 8);
-		_enemies->push(new Enemy(rX, rY));
-		_enemies->push(new Enemy(rX, rY + 1));
-		_enemies->push(new Enemy(rX, rY + 2));
-		_enemies->push(new Enemy(rX, rY + 3));
-		_enemies->push(new Enemy(rX, rY + 4));
+		_enemies->push(new Enemy(rX, rY, '|'));
+		_enemies->push(new Enemy(rX, rY + 1, '|'));
+		_enemies->push(new Enemy(rX, rY + 2, '|'));
+		_enemies->push(new Enemy(rX, rY + 3, '|'));
+		_enemies->push(new Enemy(rX, rY + 4, '|'));
 	}
 }
 
 void		Core::createSteroids(int count) {
 
 	for (int i = 0; i < count; i++)
-		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
+		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES, '.'));
 }
 
 void		Core::moveBullets() {

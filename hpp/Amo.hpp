@@ -11,10 +11,10 @@ public:
 	~Amo();
 
 	Amo(Amo const &other);
-	
+
 	Amo &operator =(Amo const &other);
 
-	Amo(int x, int y);
+	Amo(int x, int y, char character);
 
 
 	Object* clone() const;

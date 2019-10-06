@@ -5,10 +5,11 @@ Object::Object(void)
 
 }
 
-Object::Object(int x, int y)
+Object::Object(int x, int y, char character)
 {
 	_x = x;
 	_y = y;
+	_character = character;
 }
 
 
@@ -23,6 +24,7 @@ Object &Object::operator =(Object const &other)
 	{
 		_x = other._x;
 		_y = other._y;
+		_character = other._character;
 	}
 	return *this;
 }
@@ -30,6 +32,11 @@ Object &Object::operator =(Object const &other)
 Object::~Object()
 {
 
+}
+
+char Object::getCharacter() {
+
+	return (_character);
 }
 
 int Object::getX() const

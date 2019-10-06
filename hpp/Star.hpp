@@ -9,10 +9,10 @@ public:
 	Star(void);
 	~Star();
 	Star(Star const &other);
-	
+
 	Star &operator =(Star const &other);
 
-	Star(int x, int y);
+	Star(int x, int y, char character);
 
 
 	Object* clone() const;

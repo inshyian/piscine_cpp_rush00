@@ -12,11 +12,10 @@ public:
 	~Enemy();
 
 	Enemy(Enemy const &other);
-	
+
 	Enemy &operator =(Enemy const &other);
 
-	Enemy(int x, int y);
-
+	Enemy(int x, int y, char character);
 
 	Object* clone() const;
 };
