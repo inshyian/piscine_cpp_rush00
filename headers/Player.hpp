@@ -22,7 +22,7 @@ class Player : public Object
 		Bullet *shot(void);							//shoot
 		void damageReceived(int value);				//takeDamage
 		int getHp() const;							//getLives
-		void setHpValue(int value);					//setLives
+		void setHp(int value);						//setLives
 		//moveL() inherit
 		//moveR() inherit
 		//moveU() inherit
