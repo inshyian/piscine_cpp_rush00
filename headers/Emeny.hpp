@@ -11,7 +11,7 @@ class Enemy : public Object
 
 		Enemy(Enemy const &other);
 	
-		Enemy &operator =(Enemy const &other);
+		Enemy &operator =(Enemy const &assign);
 
 		Enemy(int x, int y);
 

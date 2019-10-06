@@ -2,23 +2,22 @@ NAME = ft_retro
 
 SRC = 	main.cpp \
 		Player.cpp \
-		Game.cpp \
-		CollectableItems.cpp \
-		Steroid.cpp \
-		AItem.cpp \
-		Bullet.cpp \
-		SmallEnemy.cpp
-
+		Core.cpp \
+		Collection.cpp \
+		Star.cpp \
+		Object.cpp \
+		Amo.cpp \
+		Enemy.cpp
 
 OBJ = $(addprefix obj/, $(SRC:.cpp=.o))
 
 HEADERS = 	hpp/Player.hpp \
 			hpp/Game.hpp \
-			hpp/CollectableItems.hpp \
-			hpp/Steroid.hpp \
-			hpp/AItem.hpp \
-			hpp/Bullet.hpp \
-			hpp/SmallEnemy.hpp
+			hpp/Collection.hpp \
+			hpp/Star.hpp \
+			hpp/Object.hpp \
+			hpp/Amo.hpp \
+			hpp/Enemy.hpp
 
 FLAGS = -Wall -Wextra -Werror
 

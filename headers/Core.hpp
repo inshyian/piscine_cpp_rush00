@@ -5,9 +5,9 @@
 # include "Player.hpp"
 # include <fstream>
 
-class CollectableItems;
+class Collection;
 
-class Game
+class Core
 {
 
 private:
@@ -26,16 +26,16 @@ private:
 	Player *_player;
 	int _score;
 
-	CollectableItems *_steroids;
-	CollectableItems *_bullets;
-	CollectableItems *_enemies;
+	Collection *_stars;
+	Collection *_bullets;
+	Collection *_enemies;
 
 public:
-	Game(void);
-	Game(Game const &other);
-	~Game();
+	Core(void);
+	Core(Core const &assign);
+	~Core();
 
-	Game &operator =(Game const &other);
+	Core &operator =(Core const &assign);
 	void start();
 
 	void printInfo();
