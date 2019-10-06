@@ -3,28 +3,25 @@
 
 class Object
 {
+	public:
+		Object(void);
+		Object(Object const &other);
+		Object(int x, int y);
+		virtual ~Object();
 
-public:
-	Object(void);
-	Object(Object const &other);
-	Object(int x, int y);
-	virtual ~Object();
+		virtual Object* clone() const = 0;
 
-	Object &operator =(Object const &other);
+		Object &operator =(Object const &other);
 
-	virtual Object* clone() const = 0;
+		void moveL();
+		void moveR();
+		void moveU();
+		void moveD();
 
-	int getCordX() const;
-	int getCordY() const;
-
-	void moveL();
-	void moveR();
-	void moveU();
-	void moveD();
-
-	void setX(int x);
-	void setY(int y);
-
+		int getCordX() const;
+		int getCordY() const;
+		void setCordX(int x);
+		void setCordY(int y);
 	protected:
 		int _x;
 		int _y;
