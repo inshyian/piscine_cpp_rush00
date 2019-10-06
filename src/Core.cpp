@@ -38,6 +38,7 @@ Core::~Core()
 	delete _steroids;
 	delete _bullets;
 	delete _enemies;
+	delete _player;
 	delwin(_win);
 	endwin();
 }
@@ -172,10 +173,8 @@ void		Core::createSqEnemy(int count) {
 	{
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 8);
-		_enemies->push(new Enemy(rX, rY, 'H'));
-		_enemies->push(new Enemy(rX + 1, rY, 'H'));
-		_enemies->push(new Enemy(rX, rY + 1, 'H'));
-		_enemies->push(new Enemy(rX + 1, rY + 1, 'H'));
+		_enemies->push(new Enemy(rX, rY, '['));
+		_enemies->push(new Enemy(rX + 1, rY, ']'));
 	}
 }
 
