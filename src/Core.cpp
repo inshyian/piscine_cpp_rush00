@@ -206,6 +206,45 @@ void		Core::createSteroids(int count) {
 		_steroids->push(new Star(rand() % COLUMNS, rand() % LINES));
 }
 
+void		Core::moveBullets() {
+
+	for (int i = 0; i < _bullets->getCount(); i++)
+	{
+		if (_bullets->getUnit(i)->getY() > 0)
+		{
+			wattron(_win, COLOR_PAIR(4));
+			mvwaddstr(_win, _bullets->getUnit(i)->getY(), _bullets->getUnit(i)->getX(), "|");
+			wattroff(_win, COLOR_PAIR(3));
+		}
+		_bullets->getUnit(i)->moveUp();
+	}
+}
+
+void		Core::moveSteroids() {
+
+	for (int i = 0; i < _steroids->getCount(); i++)
+	{
+		if (_steroids->getUnit(i)->getY() > LINES - 2)
+			_steroids->getUnit(i)->setY(0);
+		else if (_steroids->getUnit(i)->getX() > 0 && _steroids->getUnit(i)->getX() < COLUMNS - 2)
+			mvwaddstr(_win, _steroids->getUnit(i)->getY(), _steroids->getUnit(i)->getX(), ".");
+		_steroids->getUnit(i)->moveDown();
+	}
+}
+
+void		Core::playerAction(int key) {
+
+	if ( key == 32 )
+	{
+		Amo *newAmo = _player->shoot();
+		_bullets->push(newAmo);
+	}
+	else if ( key == 97 && _player->getX() > 3 )
+		_player->moveLeft();
+	else if ( key == 100 && _player->getX() < COLUMNS - 3 )
+		_player->moveRight();
+}
+
 void Core::start()
 {
 	srand(clock());
@@ -214,7 +253,6 @@ void Core::start()
 
 	// RANDOM STEROIDS
 	createSteroids(50);
-
 	// RANDOM ENEMIES
 	createDotEnemy(5);
 	createCrossEnemy(3);
@@ -229,10 +267,8 @@ void Core::start()
 	{
 		if ((float)(clock() - _lastTime) / CLOCKS_PER_SEC < 0.1)
 			continue ;
-
 		if (_player->getLives() == 0 || _score == _enemies->getCount())
 			break ;
-
 		printInfo();
 		_lastTime = clock();
 		wclear(_win);
@@ -242,38 +278,14 @@ void Core::start()
 		box(_info, 0, 0);
 		wattroff(_win, COLOR_PAIR(1));
 		wattroff(_info, COLOR_PAIR(1));
-		for (int i = 0; i < _steroids->getCount(); i++)
-		{
-			if (_steroids->getUnit(i)->getY() > LINES - 2)
-				_steroids->getUnit(i)->setY(0);
-			else if (_steroids->getUnit(i)->getX() > 0 && _steroids->getUnit(i)->getX() < COLUMNS - 2)
-				mvwaddstr(_win, _steroids->getUnit(i)->getY(), _steroids->getUnit(i)->getX(), ".");
-			_steroids->getUnit(i)->moveDown();
-		}
+		moveSteroids();
 		// PLAYER
 		wattron(_win, COLOR_PAIR(3));
 		mvwaddstr(_win, _player->getY(), _player->getX(), "^");
 		wattroff(_win, COLOR_PAIR(3));
-		if ( key == 32 )
-		{
-			Amo *newAmo = _player->shoot();
-			_bullets->push(newAmo);
-		}
-		else if ( key == 97 && _player->getX() > 3 )
-			_player->moveLeft();
-		else if ( key == 100 && _player->getX() < COLUMNS - 3 )
-			_player->moveRight();
+		playerAction(key);
 		// BULLETS
-		for (int i = 0; i < _bullets->getCount(); i++)
-		{
-			if (_bullets->getUnit(i)->getY() > 0)
-			{
-				wattron(_win, COLOR_PAIR(4));
-				mvwaddstr(_win, _bullets->getUnit(i)->getY(), _bullets->getUnit(i)->getX(), "|");
-				wattroff(_win, COLOR_PAIR(3));
-			}
-			_bullets->getUnit(i)->moveUp();
-		}
+		moveBullets();
 		// ENEMIES
 		moveEnemies();
 		// REFRESH

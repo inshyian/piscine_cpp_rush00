@@ -30,28 +30,31 @@ private:
 	Collection			*_bullets;
 	Collection			*_enemies;
 
-	void		printInfo();
+	void				printInfo();
 
-	bool		checkPenetration(Object *enemy);
-	bool		checkCollision(Object *enemy);
+	bool				checkPenetration(Object *enemy);
+	bool				checkCollision(Object *enemy);
 
-	void		moveEnemies();
+	void				moveEnemies();
+	void				moveBullets();
+	void				moveSteroids();
+	void				playerAction(int key);
 
-	void		createSteroids(int count);
+	void				createSteroids(int count);
 
-	void		createDotEnemy(int count);
-	void		createCrossEnemy(int count);
-	void		createSqEnemy(int count);
-	void		createHorEnemy(int count);
-	void		createVertEnemy(int count);
+	void				createDotEnemy(int count);
+	void				createCrossEnemy(int count);
+	void				createSqEnemy(int count);
+	void				createHorEnemy(int count);
+	void				createVertEnemy(int count);
 
 public:
 	Core(void);
 	Core(Core const &other);
 	~Core();
 
-	Core &operator =(Core const &other);
-	void		start();
+	Core				&operator =(Core const &other);
+	void				start();
 };
 
 
