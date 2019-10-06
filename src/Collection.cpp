@@ -9,7 +9,12 @@ Collection::Collection(void)
 
 Collection::~Collection()
 {
-
+	if (_count > 0)
+	{
+		for (int i = 0; i < _count; i++)
+			delete _items[i];
+		delete _items;
+	}
 }
 
 Collection::Collection(Collection const &other)
@@ -26,7 +31,7 @@ Collection &Collection::operator =(Collection const &other)
 			for (int i = 0; i < _count; i++)
 				delete _items[i];
 			delete _items;
-		
+
 		_count = other._count;
 
 		_items = new Object*[_count];
@@ -74,7 +79,7 @@ int	Collection::push(Object* newItem)
 	Object **container;
 
 	if (_count == 0)
-	{		
+	{
 		container = new Object*[1];
 		container[0] = newItem;
 		_items = container;

@@ -35,6 +35,9 @@ Core::Core(void)
 
 Core::~Core()
 {
+	delete _steroids;
+	delete _bullets;
+	delete _enemies;
 	delwin(_win);
 	endwin();
 }
@@ -128,9 +131,7 @@ void Core::printInfo()
 	wattron(_info, COLOR_PAIR(2));
 	mvwprintw(_info, 1, 6, "*GAME*", _player->getLives());
 	mvwprintw(_info, 4, 2, "LIVES: %d", _player->getLives());
-
 	mvwprintw(_info, 6, 2, "SCORE: %d", _score);
-
 	mvwprintw(_info, 8, 2, "TIME: %ds", (time(NULL) - _startGame));
 
 }
@@ -258,7 +259,7 @@ void Core::start()
 			Amo *newAmo = _player->shoot();
 			_bullets->push(newAmo);
 		}
-		if ( key == 97 && _player->getX() > 3 )
+		else if ( key == 97 && _player->getX() > 3 )
 			_player->moveLeft();
 		else if ( key == 100 && _player->getX() < COLUMNS - 3 )
 			_player->moveRight();
