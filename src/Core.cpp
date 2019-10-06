@@ -164,7 +164,7 @@ void Core::start()
 			break ;
 
 		printInfo();
-			_lastTime = clock();
+		_lastTime = clock();
 		wclear(_win);
 		wattron(_win, COLOR_PAIR(1));
 		wattron(_info, COLOR_PAIR(1));
@@ -193,7 +193,6 @@ void Core::start()
 			_player->moveLeft();
 		else if ( key == 100 && _player->getX() < COLUMNS - 3 )
 			_player->moveRight();
-		fflush(stdin);
 		// BULLETS
 		for (int i = 0; i < _bullets->getCount(); i++)
 		{
@@ -211,6 +210,7 @@ void Core::start()
 		wrefresh(_win);
 		wrefresh(_info);
 		key = getch();
+		flushinp();
 		if (key == 27)
 			break ;
 	}
