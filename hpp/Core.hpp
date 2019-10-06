@@ -41,8 +41,8 @@ public:
 
 	void printInfo();
 
-	bool checkPenetration(AItem *enemy);
-	bool checkCollision(AItem *enemy);
+	bool checkPenetration(Object *enemy);
+	bool checkCollision(Object *enemy);
 
 	void moveEnemies();
 };

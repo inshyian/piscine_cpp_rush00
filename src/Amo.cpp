@@ -26,13 +26,13 @@ Amo &Amo::operator =(Amo const &other)
 	return *this;
 }
 
-Amo::Amo(int x, int y) : AItem(x, y)
+Amo::Amo(int x, int y) : Object(x, y)
 {
 	
 }
 
-AItem* Amo::clone() const
+Object* Amo::clone() const
 {
-	Amo *newST = new Amo(*this);
-	return newST;
+	Amo *createNewOne = new Amo(*this);
+	return createNewOne;
 }

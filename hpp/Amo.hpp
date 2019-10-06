@@ -1,9 +1,9 @@
 #ifndef AMO_HPP
 # define AMO_HPP
 
-# include "AItem.hpp"
+# include "Object.hpp"
 
-class Amo : public AItem
+class Amo : public Object
 {
 
 public:
@@ -17,7 +17,7 @@ public:
 	Amo(int x, int y);
 
 
-	AItem* clone() const;
+	Object* clone() const;
 
 };
 

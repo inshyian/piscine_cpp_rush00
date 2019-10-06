@@ -3,14 +3,14 @@
 
 # include <iostream>
 
-class AItem;
+class Object;
 
 class Collection
 {
 	
 private:
 	int _count;
-	AItem **_items;
+	Object **_items;
 
 public:
 	Collection(void);
@@ -20,9 +20,9 @@ public:
 	Collection &operator =(Collection const &other);
 
 	int		getCount(void) const;
-	AItem*	getUnit(int n) const;
+	Object*	getUnit(int n) const;
 	void	setNullUnit(int n);
-	int		push(AItem* newItem);
+	int		push(Object* newItem);
 
 };
 

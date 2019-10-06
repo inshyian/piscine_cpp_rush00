@@ -1,6 +1,6 @@
 #include "Collection.hpp"
 
-#include "AItem.hpp"
+#include "Object.hpp"
 
 Collection::Collection(void)
 {
@@ -29,7 +29,7 @@ Collection &Collection::operator =(Collection const &other)
 		
 		_count = other._count;
 
-		_items = new AItem*[_count];
+		_items = new Object*[_count];
 		for (int i = 0; i < _count; i++)
 			this->_items[i] = other.getUnit(i)->clone();
 		}
@@ -37,7 +37,7 @@ Collection &Collection::operator =(Collection const &other)
 	return *this;
 }
 
-AItem*	Collection::getUnit(int n) const
+Object*	Collection::getUnit(int n) const
 {
 	if (n < 0 || n > _count)
 		return (NULL);
@@ -58,7 +58,7 @@ int	Collection::getCount(void) const
 	return _count;
 }
 
-int	Collection::push(AItem* newItem)
+int	Collection::push(Object* newItem)
 {
 	if (newItem == NULL)
 		return _count;
@@ -71,11 +71,11 @@ int	Collection::push(AItem* newItem)
 		}
 	}
 
-	AItem **container;
+	Object **container;
 
 	if (_count == 0)
 	{		
-		container = new AItem*[1];
+		container = new Object*[1];
 		container[0] = newItem;
 		_items = container;
 		_count++;
@@ -84,7 +84,7 @@ int	Collection::push(AItem* newItem)
 	{
 		_count++;
 		int i = 0;
-		container = new AItem*[_count];
+		container = new Object*[_count];
 		for (; i < (_count - 1); i++)
 			container[i] = _items[i];
 		container[i] = newItem;

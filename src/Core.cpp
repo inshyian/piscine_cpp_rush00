@@ -51,7 +51,7 @@ Core &Core::operator =(Core const &other)
 	return *this;
 }
 
-bool Core::checkPenetration(AItem *enemy)
+bool Core::checkPenetration(Object *enemy)
 {
 	for (int i = 0; i < _bullets->getCount(); i++)
 	{
@@ -65,7 +65,7 @@ bool Core::checkPenetration(AItem *enemy)
 	return false;
 }
 
-bool Core::checkCollision(AItem *enemy)
+bool Core::checkCollision(Object *enemy)
 {
 	if (_player->getX() == enemy->getX() &&
 		_player->getY() == enemy->getY())

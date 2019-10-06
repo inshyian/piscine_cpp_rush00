@@ -23,13 +23,13 @@ Enemy &Enemy::operator =(Enemy const &other)
 	return *this;
 }
 
-Enemy::Enemy(int x, int y) : AItem(x, y)
+Enemy::Enemy(int x, int y) : Object(x, y)
 {
 
 }
 
-AItem* Enemy::clone() const
+Object* Enemy::clone() const
 {
-	Enemy *newST = new Enemy(*this);
-	return newST;
+	Enemy *createNewOne = new Enemy(*this);
+	return createNewOne;
 }

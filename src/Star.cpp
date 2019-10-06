@@ -24,14 +24,14 @@ Star &Star::operator =(Star const &other)
 	return *this;
 }
 
-Star::Star(int x, int y) : AItem(x, y)
+Star::Star(int x, int y) : Object(x, y)
 {
 
 }
 
-AItem* Star::clone() const
+Object* Star::clone() const
 {
-	Star *newST = new Star(*this);
-	return newST;
+	Star *createNewOne = new Star(*this);
+	return createNewOne;
 }
 

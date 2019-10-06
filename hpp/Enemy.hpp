@@ -1,10 +1,10 @@
 #ifndef ENEMY_HPP
 # define ENEMY_HPP
 
-# include "AItem.hpp"
+# include "Object.hpp"
 
 
-class Enemy : public AItem
+class Enemy : public Object
 {
 
 public:
@@ -18,7 +18,7 @@ public:
 	Enemy(int x, int y);
 
 
-	AItem* clone() const;
+	Object* clone() const;
 };
 
 

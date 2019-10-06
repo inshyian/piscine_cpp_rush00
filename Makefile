@@ -5,7 +5,7 @@ SRC = 	main.cpp \
 		Core.cpp \
 		Collection.cpp \
 		Star.cpp \
-		AItem.cpp \
+		Object.cpp \
 		Amo.cpp \
 		Enemy.cpp
 
@@ -16,7 +16,7 @@ HEADERS = 	hpp/Player.hpp \
 			hpp/Core.hpp \
 			hpp/Collection.hpp \
 			hpp/Star.hpp \
-			hpp/AItem.hpp \
+			hpp/Object.hpp \
 			hpp/Amo.hpp \
 			hpp/Enemy.hpp
 

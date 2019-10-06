@@ -1,14 +1,10 @@
 #ifndef STAR_HPP
 # define STAR_HPP
 
-#include "AItem.hpp"
+#include "Object.hpp"
 
-class Star : public AItem
+class Star : public Object
 {
-//private:
-//	int _x;
-//	int _y;
-
 public:
 	Star(void);
 	~Star();
@@ -19,7 +15,7 @@ public:
 	Star(int x, int y);
 
 
-	AItem* clone() const;
+	Object* clone() const;
 
 };
 
