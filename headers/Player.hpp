@@ -12,7 +12,7 @@ class Player : public Object
 
 	public:
 		Player(void);
-		Player(Player const &other);
+		Player(Player const &assign);
 		Player(int x, int y, int hp);
 		~Player();
 
