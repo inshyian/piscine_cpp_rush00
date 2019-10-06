@@ -64,9 +64,9 @@ void Player::takeDamage(int damge)
 		_lives = 0;
 }
 
-Amo *Player::shoot(void)
+Amo *Player::shoot(char character)
 {
-	return new Amo(_x, _y - 1, '^');
+	return new Amo(_x, _y - 1, character);
 }
 
 bool Player::isAlive()

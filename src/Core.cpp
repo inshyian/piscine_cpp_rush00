@@ -91,7 +91,7 @@ void Core::moveEnemies()
 		for (int i = 0; i < _enemies->getCount(); i++)
 		{
 			if (_enemies->getUnit(i) != NULL && _enemies->getUnit(i)->getY() > LINES - 2)
-				_enemies->getUnit(i)->setY(0);
+				_enemies->getUnit(i)->setY(1);
 			else if (_enemies->getUnit(i) != NULL && checkPenetration(_enemies->getUnit(i)) == true)
 				_enemies->setNullUnit(i);
 			else if (_enemies->getUnit(i) != NULL && checkCollision(_enemies->getUnit(i)) == true)
@@ -112,7 +112,7 @@ void Core::moveEnemies()
 		for (int i = 0; i < _enemies->getCount(); i++)
 		{
 			if (_enemies->getUnit(i) != NULL && _enemies->getUnit(i)->getY() > LINES - 2)
-				_enemies->getUnit(i)->setY(0);
+				_enemies->getUnit(i)->setY(1);
 			else if (_enemies->getUnit(i) != NULL && checkPenetration(_enemies->getUnit(i)) == true)
 				_enemies->setNullUnit(i);
 			else if (_enemies->getUnit(i) != NULL && checkCollision(_enemies->getUnit(i)) == true)
@@ -197,9 +197,9 @@ void		Core::createVertEnemy(int count) {
 		int rX = 3 + (rand() % 150);
 		int rY = 2 + (rand() % 8);
 		_enemies->push(new Enemy(rX, rY, '|'));
-		_enemies->push(new Enemy(rX, rY + 1, '|'));
-		_enemies->push(new Enemy(rX, rY + 2, '|'));
-		_enemies->push(new Enemy(rX, rY + 3, '|'));
+		_enemies->push(new Enemy(rX, rY + 1, '+'));
+		_enemies->push(new Enemy(rX, rY + 2, '+'));
+		_enemies->push(new Enemy(rX, rY + 3, '+'));
 		_enemies->push(new Enemy(rX, rY + 4, '|'));
 	}
 }
@@ -212,12 +212,15 @@ void		Core::createSteroids(int count) {
 
 void		Core::moveBullets() {
 
+	std::string		character;
+
 	for (int i = 0; i < _bullets->getCount(); i++)
 	{
 		if (_bullets->getUnit(i)->getY() > 0)
 		{
+			character = _bullets->getUnit(i)->getCharacter();
 			wattron(_win, COLOR_PAIR(4));
-			mvwaddstr(_win, _bullets->getUnit(i)->getY(), _bullets->getUnit(i)->getX(), "|");
+			mvwaddstr(_win, _bullets->getUnit(i)->getY(), _bullets->getUnit(i)->getX(), character.c_str());
 			wattroff(_win, COLOR_PAIR(3));
 		}
 		_bullets->getUnit(i)->moveUp();
@@ -226,12 +229,17 @@ void		Core::moveBullets() {
 
 void		Core::moveSteroids() {
 
+	std::string		character;
+
 	for (int i = 0; i < _steroids->getCount(); i++)
 	{
 		if (_steroids->getUnit(i)->getY() > LINES - 2)
 			_steroids->getUnit(i)->setY(0);
 		else if (_steroids->getUnit(i)->getX() > 0 && _steroids->getUnit(i)->getX() < COLUMNS - 2)
-			mvwaddstr(_win, _steroids->getUnit(i)->getY(), _steroids->getUnit(i)->getX(), ".");
+		{
+			character = _steroids->getUnit(i)->getCharacter();
+			mvwaddstr(_win, _steroids->getUnit(i)->getY(), _steroids->getUnit(i)->getX(), character.c_str());
+		}
 		_steroids->getUnit(i)->moveDown();
 	}
 }
@@ -240,7 +248,7 @@ void		Core::playerAction(int key) {
 
 	if ( key == 32 )
 	{
-		Amo *newAmo = _player->shoot();
+		Amo *newAmo = _player->shoot('^');
 		_bullets->push(newAmo);
 	}
 	else if ( key == 97 && _player->getX() > 3 )

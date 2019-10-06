@@ -20,7 +20,7 @@ public:
 	Player &operator =(Player const &other);
 
 	void takeDamage(int damge);
-	Amo *shoot(void);
+	Amo *shoot(char character);
 	bool isAlive();
 
 	int getX() const;

@@ -8,6 +8,6 @@ int main(void)
 
 	gameConsole->start();
 	delete gameConsole;
-	system("leaks -q ft_retro");
+	// system("leaks -q ft_retro");
 	return 0;
 }
